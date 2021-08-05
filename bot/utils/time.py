@@ -124,7 +124,7 @@ def humanize_delta(delta: relativedelta, precision: str = "seconds", max_units: 
 def get_time_delta(time_string: str) -> str:
     """Returns the time in human-readable time delta format."""
     date_time = dateutil.parser.isoparse(time_string).replace(tzinfo=None)
-    time_delta = time_since(date_time)
+    time_delta = format_relative(date_time)
 
     return time_delta
 
@@ -160,9 +160,14 @@ def relativedelta_to_timedelta(delta: relativedelta) -> datetime.timedelta:
     return utcnow + delta - utcnow
 
 
-def time_since(past_datetime: datetime.datetime) -> str:
-    """Takes a datetime and returns a discord timestamp that describes how long ago that datetime was."""
-    return discord_timestamp(past_datetime, TimestampFormats.RELATIVE)
+def format_relative(timestamp: ValidTimestamp) -> str:
+    """
+    Format `timestamp` as a relative Discord timestamp.
+
+    A relative timestamp describes how much time has elapsed since `timestamp` or how much time
+    remains until `timestamp` is reached. See `time.discord_timestamp`.
+    """
+    return discord_timestamp(timestamp, TimestampFormats.RELATIVE)
 
 
 def format_infraction(timestamp: str) -> str:
