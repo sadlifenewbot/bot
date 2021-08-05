@@ -18,7 +18,6 @@ from bot.exts.moderation.modlog import ModLog
 from bot.pagination import LinePaginator
 from bot.utils import messages, time
 from bot.utils.channel import is_mod_channel
-from bot.utils.time import humanize_delta, until_expiration
 
 log = logging.getLogger(__name__)
 
@@ -167,8 +166,8 @@ class ModManagement(commands.Cog):
                 self.infractions_cog.schedule_expiration(new_infraction)
 
             log_text += f"""
-                Previous expiry: {until_expiration(infraction['expires_at']) or "Permanent"}
-                New expiry: {until_expiration(new_infraction['expires_at']) or "Permanent"}
+                Previous expiry: {time.until_expiration(infraction['expires_at']) or "Permanent"}
+                New expiry: {time.until_expiration(new_infraction['expires_at']) or "Permanent"}
             """.rstrip()
 
         changes = ' & '.join(confirm_messages)
@@ -300,7 +299,7 @@ class ModManagement(commands.Cog):
         else:
             date_from = datetime.fromtimestamp(float(time.DISCORD_TIMESTAMP_REGEX.match(created).group(1)))
             date_to = dateutil.parser.isoparse(expires_at).replace(tzinfo=None)
-            duration = humanize_delta(relativedelta(date_to, date_from))
+            duration = time.humanize_delta(relativedelta(date_to, date_from))
 
         lines = textwrap.dedent(f"""
             {"**===============**" if active else "==============="}
