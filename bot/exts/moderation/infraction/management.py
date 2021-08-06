@@ -2,9 +2,7 @@ import logging
 import textwrap
 import typing as t
 
-import arrow
 import discord
-from dateutil.relativedelta import relativedelta
 from discord.ext import commands
 from discord.ext.commands import Context
 from discord.utils import escape_markdown
@@ -297,9 +295,7 @@ class ModManagement(commands.Cog):
         if expires_at is None:
             duration = "*Permanent*"
         else:
-            start = arrow.get(inserted_at).datetime
-            end = arrow.get(expires_at).datetime
-            duration = time.humanize_delta(relativedelta(start, end))
+            duration = time.humanize_delta(inserted_at, expires_at)
 
         lines = textwrap.dedent(f"""
             {"**===============**" if active else "==============="}

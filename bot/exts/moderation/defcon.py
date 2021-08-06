@@ -238,7 +238,7 @@ class Defcon(Cog):
 
         expiry_message = ""
         if expiry:
-            formatted_expiry = time.humanize_delta(relativedelta(expiry, datetime.utcnow()), max_units=2)
+            formatted_expiry = time.humanize_delta(expiry, max_units=2)
             expiry_message = f" for the next {formatted_expiry}"
 
         if self.threshold:
