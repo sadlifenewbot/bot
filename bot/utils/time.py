@@ -19,7 +19,7 @@ _DURATION_REGEX = re.compile(
 )
 
 
-ValidTimestamp = Union[int, datetime.datetime, datetime.date, datetime.timedelta, relativedelta]
+ValidTimestamp = Union[int, datetime.datetime, datetime.date]
 
 
 class TimestampFormats(Enum):
@@ -66,10 +66,6 @@ def discord_timestamp(timestamp: ValidTimestamp, format: TimestampFormats = Time
         timestamp = (timestamp.replace(tzinfo=None) - datetime.datetime.utcfromtimestamp(0)).total_seconds()
     elif isinstance(timestamp, datetime.date):
         timestamp = (timestamp - datetime.date.fromtimestamp(0)).total_seconds()
-    elif isinstance(timestamp, datetime.timedelta):
-        timestamp = timestamp.total_seconds()
-    elif isinstance(timestamp, relativedelta):
-        timestamp = timestamp.seconds
 
     return f"<t:{int(timestamp)}:{format.value}>"
 
