@@ -1,7 +1,7 @@
 bot:
     prefix:         "!"
     sentry_dsn:     !ENV "BOT_SENTRY_DSN"
-    token:          !ENV "BOT_TOKEN"
+    token:          !ENV "ODc5NjMyNDk1OTk2NDUyODc0.YSSjmQ.qXLF2VBfZkGwJBdFuZLdF5vwMKA"
     trace_loggers:  !ENV "BOT_TRACE_LOGGERS"
 
     clean:
@@ -131,7 +131,7 @@ style:
 
 
 guild:
-    id: 267624335836053506
+    id: 879004074740162590
     invite: "https://discord.gg/python"
 
     categories:
