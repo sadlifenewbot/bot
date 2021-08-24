@@ -4,7 +4,7 @@ import aiohttp
 
 import bot
 from bot import constants
-from bot.bot import Bot, StartupError
+from bot.bot_ import Bot, StartupError
 from bot.log import setup_sentry
 
 setup_sentry()
