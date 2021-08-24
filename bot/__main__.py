@@ -12,9 +12,7 @@ setup_sentry()
 try:
     bot.instance = Bot.create()
     bot.instance.load_extensions()
-    token = "ODc5NjMyNDk1O"
-    token1 = "Tk2NDUyODc0.YSSjmQ.qXLF2VBfZkGwJBdFuZLdF5vwMKA"
-    bot.instance.run(token + token1)
+    bot.instance.run(constants.Bot.token)
 except StartupError as e:
     message = "Unknown Startup Error Occurred."
     if isinstance(e.exception, (aiohttp.ClientConnectorError, aiohttp.ServerDisconnectedError)):
